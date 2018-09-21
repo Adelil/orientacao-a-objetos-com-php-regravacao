@@ -10,38 +10,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Car.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/aula-classes-objetos/Car.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1216">
-              <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-              <folding>
-                <marker date="1537548839000" expanded="true" signature="257:306" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Car-manipulando-construtor-destrutor.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/aula-classes-objetos/Car-manipulando-construtor-destrutor.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="2" column="11" lean-forward="true" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="visibilidade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/visibilidade-encapsulamento/visibilidade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -130,16 +99,15 @@
       <option name="presentableId" value="Default" />
       <updated>1537453844097</updated>
       <workItem from="1537453850170" duration="2969000" />
-      <workItem from="1537541042836" duration="4889000" />
+      <workItem from="1537541042836" duration="5500000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7858000" />
+    <option name="totallyTimeSpent" value="8469000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -186,10 +154,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/visibilidade-encapsulamento/visibilidade.php">
+    <entry file="file://$PROJECT_DIR$/aula-classes-objetos/Car.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        <state relative-caret-position="1216">
+          <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+          <folding>
+            <marker date="1537548839000" expanded="true" signature="257:306" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -200,13 +171,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/aula-classes-objetos/Car.php">
+    <entry file="file://$PROJECT_DIR$/visibilidade-encapsulamento/visibilidade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1216">
-          <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-          <folding>
-            <marker date="1537548839000" expanded="true" signature="257:306" ph="..." />
-          </folding>
+        <state relative-caret-position="418">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
         </state>
       </provider>
     </entry>
