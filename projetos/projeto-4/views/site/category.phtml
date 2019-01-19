@@ -3,11 +3,22 @@
     <div class="col-md-12">
         <div class="col-md-7 pull-left">
             <div class="row">
-                <h2><?=$this->post['title']?></h2>
-                <small>Criado em <?=date('d/M/Y H:i:s', strtotime($this->post['created_at']));?></small>
+                <h1><?=$this->category;?></h1>
                 <hr>
             </div>
-	        <?=$this->post['description'];?>
+	        <?php foreach($this->posts as $post): ?>
+                <div class="row">
+                    <h2>
+                        <a href="<?=HOME . '/post/' . $post['slug'];?>">
+					        <?=$post['title'];?>
+                        </a>
+                    </h2>
+                    <small>Criado em <?=date('d/M/Y H:i:s', strtotime($post['created_at']));?></small>
+                    <p>
+				        <?=$post['description'];?>
+                    </p>
+                </div>
+	        <?php endforeach;?>
         </div>
 
         <div class="col-md-4 pull-right">

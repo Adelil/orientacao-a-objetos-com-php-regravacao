@@ -11,12 +11,20 @@ class ComposerStaticInit39d48747d11b6c2044bbc5a358db099b
         array (
             'Code\\' => 5,
         ),
+        'A' => 
+        array (
+            'Ausi\\SlugGenerator\\' => 19,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Code\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Ausi\\SlugGenerator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ausi/slug-generator/src',
         ),
     );
 

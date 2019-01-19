@@ -2,6 +2,8 @@
 namespace Code\Controller;
 
 
+use Ausi\SlugGenerator\SlugGenerator;
+use Code\Authenticator\CheckUserLogged;
 use Code\DB\Connection;
 use Code\Entity\Category;
 use Code\Entity\Post;
@@ -13,6 +15,13 @@ use Code\View\View;
 
 class PostsController
 {
+	use CheckUserLogged;
+
+	public function __construct()
+	{
+		if(!$this->check()) return header('Location: ' . HOME . '/auth/login');
+	}
+
 	public function index()
 	{
 		$view = new View('admin/posts/index.phtml');
@@ -34,6 +43,7 @@ class PostsController
 				}
 
 				$post = new Post(Connection::getInstance());
+				$data['slug'] = (new SlugGenerator())->generate($data['title']);
 
 				if(!$post->insert($data)) {
 					Flash::add('error', 'Erro ao criar postagem!');

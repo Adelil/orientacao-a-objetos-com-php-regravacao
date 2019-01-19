@@ -2,6 +2,7 @@
 namespace Code\Controller;
 
 
+use Code\Authenticator\CheckUserLogged;
 use Code\DB\Connection;
 use Code\Entity\User;
 use Code\Security\PasswordHash;
@@ -12,6 +13,14 @@ use Code\View\View;
 
 class UsersController
 {
+
+	use CheckUserLogged;
+
+	public function __construct()
+	{
+		if(!$this->check()) return header('Location: ' . HOME . '/auth/login');
+	}
+
 	public function index()
 	{
 		$view = new View('admin/users/index.phtml');

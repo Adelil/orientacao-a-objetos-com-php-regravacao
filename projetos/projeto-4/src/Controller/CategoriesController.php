@@ -2,6 +2,8 @@
 namespace Code\Controller;
 
 
+use Ausi\SlugGenerator\SlugGenerator;
+use Code\Authenticator\CheckUserLogged;
 use Code\DB\Connection;
 use Code\Entity\Category;
 use Code\Session\Flash;
@@ -11,6 +13,14 @@ use Code\View\View;
 
 class CategoriesController
 {
+
+	use CheckUserLogged;
+
+	public function __construct()
+	{
+		if(!$this->check()) return header('Location: ' . HOME . '/auth/login');
+	}
+
 	public function index()
 	{
 		$view = new View('admin/categories/index.phtml');
@@ -32,6 +42,7 @@ class CategoriesController
 				}
 
 				$post = new Category(Connection::getInstance());
+				$data['slug'] = (new SlugGenerator())->generate($data['name']);
 
 				if(!$post->insert($data)) {
 					Flash::add('error', 'Erro ao criar categoria!');

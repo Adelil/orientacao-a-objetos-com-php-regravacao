@@ -5,7 +5,7 @@
 	<meta name="viewport"
 	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Projeto 3 - Gerenciador Pessoal de Gastos</title>
+	<title>Projeto 4 - Blog</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
@@ -25,6 +25,7 @@
 				<li class="active">
 					<a href="<?=HOME;?>/">Home</a>
 				</li>
+				<?php if(\Code\Session\Session::has('user')): ?>
                 <li>
                     <a href="<?=HOME;?>/posts">Posts</a>
                 </li>
@@ -34,10 +35,9 @@
                 <li>
                     <a href="<?=HOME;?>/users">Usuários</a>
                 </li>
-				<?php if(\Code\Session\Session::has('user')): ?>
-                    <li>
-                        <a href="<?=HOME;?>/auth/logout">Deslogar</a>
-                    </li>
+                <li>
+                    <a href="<?=HOME;?>/auth/logout">Deslogar</a>
+                </li>
                 <?php else: ?>
                     <li>
                         <a href="<?=HOME;?>/auth/login">Login</a>

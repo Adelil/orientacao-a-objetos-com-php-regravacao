@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Code\\' => array($baseDir . '/src'),
+    'Ausi\\SlugGenerator\\' => array($vendorDir . '/ausi/slug-generator/src'),
 );
