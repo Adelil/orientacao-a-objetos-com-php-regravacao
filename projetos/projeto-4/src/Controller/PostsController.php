@@ -136,4 +136,12 @@ class PostsController
 			return header('Location: ' . HOME . '/posts');
 		}
 	}
+
+	public function modal()
+	{
+		$data = $_POST;
+		$data['teste'] = 'OKOKO';
+
+		return json_encode($data);
+	}
 }
