@@ -1,7 +1,7 @@
-<?php require VIEWS_PATH . 'includes/header.phtml';?>
+<?php require VIEWS_PATH . '/admin/includes/header.phtml';?>
 <div class="container">
 	<div class="col-md-12">
-		<h1>Categories - <small>Gerencie suas categorias</small>
+		<h1>Categorias - <small>Gerencie suas categorias</small>
             <a href="<?=HOME . '/categories/new';?>" class="btn btn-success pull-right">Criar Nova Categoria</a>
         </h1>
 		<hr>
@@ -22,16 +22,16 @@
 			</tr>
 			</thead>
 			<tbody>
-			<?php foreach($this->categories as $p):?>
+			<?php foreach($this->categories as $c):?>
 			<tr>
-				<td><?=$p['id'];?></td>
-				<td><?=$p['name'];?></td>
-				<td><?=date('d/m/Y H:i:s', strtotime($p['created_at']));?></td>
+				<td><?=$c['id'];?></td>
+				<td><?=$c['name'];?></td>
+				<td><?=date('d/m/Y H:i:s', strtotime($c['created_at']));?></td>
 				<td>
-					<a href="<?=HOME;?>/categories/edit/<?=$p['id'];?>" class="btn btn-default">
+					<a href="<?=HOME;?>/categories/edit/<?=$c['id'];?>" class="btn btn-default">
 						Editar
 					</a>
-					<a href="<?=HOME;?>/categories/remove/<?=$p['id'];?>" class="btn btn-danger">
+					<a href="<?=HOME;?>/categories/remove/<?=$c['id'];?>" class="btn btn-danger">
 						Excluir
 					</a>
 				</td>
@@ -42,4 +42,4 @@
 	</div>
 
 </div>
-<?php require VIEWS_PATH . 'includes/footer.phtml';?>
+<?php require VIEWS_PATH . '/admin/includes/footer.phtml';?>

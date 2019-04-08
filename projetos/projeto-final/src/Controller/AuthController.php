@@ -22,7 +22,7 @@ class AuthController
 			}
 
 			Flash::add("success","Usuário logado com suceso!");
-			return header("Location: " . HOME . '/posts');
+			return header("Location: " . HOME . '/admin/products');
 		}
 		$view = new View('auth/index.phtml');
 		return $view->render();

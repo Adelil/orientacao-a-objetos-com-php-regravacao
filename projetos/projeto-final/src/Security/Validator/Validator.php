@@ -7,7 +7,7 @@ class Validator
 	public static function validateRequiredFields(array $data): bool
 	{
 		foreach($data as $key => $value) {
-			if(is_null($data[$key])) {
+			if(!$data[$key]) {
 				return false;
 				break;
 			}
