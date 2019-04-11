@@ -5,9 +5,11 @@ namespace Code\Controller\Admin;
 use Ausi\SlugGenerator\SlugGenerator;
 use Code\DB\Connection;
 use Code\Entity\Product;
+use Code\Entity\ProductImage;
 use Code\Security\Validator\Sanitizer;
 use Code\Security\Validator\Validator;
 use Code\Session\Flash;
+use Code\Upload\Upload;
 use Code\View\View;
 
 class ProductsController
@@ -24,8 +26,8 @@ class ProductsController
 	public function new()
 	{
 		if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
 			$data = $_POST;
+			$images = $_FILES['images'];
 
 			$data = Sanitizer::sanitizeData($data, Product::$filters);
 
@@ -35,13 +37,29 @@ class ProductsController
 			}
 
 			$data['slug']  = (new SlugGenerator())->generate($data['name']);
-			$data['price'] = number_format($data['price'], 2, '.', '.');
+			$data['price'] = number_format((float) $data['price'], 2, '.', '.');
 
 			$product = new Product(Connection::getInstance());
+			$productId = $product->insert($data);
 
-			if(!$product->insert($data)) {
+			if(!$productId) {
 				Flash::add('error', 'Erro ao criar produto!');
 				return header('Location: ' . HOME . '/admin/products/new');
+			}
+
+			if(isset($images['name']) && $images['name']) {
+				$upload = new Upload();
+				$upload->setFolder(UPLOAD_PATH . '/products/');
+				$images = $upload->doUpload($images);
+
+				foreach ($images as $image) {
+					$imagesData = [];
+					$imagesData['product_id'] = $productId;
+					$imagesData['image'] = $image;
+
+					$productImages = new ProductImage(Connection::getInstance());
+					$productImages->insert($imagesData);
+				}
 			}
 
 			Flash::add('success', 'Produto criado com sucesso!');

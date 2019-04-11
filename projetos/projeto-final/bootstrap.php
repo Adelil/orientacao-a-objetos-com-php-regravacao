@@ -3,6 +3,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 define('HOME', 'http://localhost:3030');
 define('VIEWS_PATH', __DIR__ . '/views/');
+define('UPLOAD_PATH', __DIR__ . '/public/uploads/');
 define('APP_DEBUG', true);
 
 /**

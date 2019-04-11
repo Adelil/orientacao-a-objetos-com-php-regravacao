@@ -12,7 +12,7 @@
 		</div>
 
 		<div class="row">
-			<form action="<?=HOME;?>/admin/products/new" method="post">
+			<form action="<?=HOME;?>/admin/products/new" method="post" enctype="multipart/form-data">
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>Nome do produto</label>
@@ -55,6 +55,13 @@
 
 					</div>
 				</div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Selecione as imagens do produto</label>
+                        <input type="file" name="images[]" multiple class="form-control">
+                    </div>
+                </div>
 
 				<div class="col-md-12">
 					<button type="submit" class="btn btn-lg btn-success">Criar Produto</button>

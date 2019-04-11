@@ -58,7 +58,7 @@ abstract class Entity
 		return $get->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
-	public function insert($data): bool
+	public function insert($data): int
 	{
 		$binds = array_keys($data);
 
@@ -67,7 +67,9 @@ abstract class Entity
 
 		$insert = $this->bind($sql, $data);
 
-		return $insert->execute();
+		$insert->execute();
+
+		return $this->conn->lastInsertId();
 	}
 
 	public function update($data): bool
