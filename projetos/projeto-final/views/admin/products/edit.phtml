@@ -12,7 +12,7 @@
 		</div>
 
 		<div class="row">
-			<form action="<?=HOME;?>/admin/products/edit/<?=$this->product['id'];?>" method="post">
+			<form action="<?=HOME;?>/admin/products/edit/<?=$this->product['id'];?>" method="post" enctype="multipart/form-data">
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>Nome do produto</label>
@@ -57,11 +57,34 @@
 					</div>
 				</div>
 
-				<div class="col-md-12">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Selecione as imagens do produto</label>
+                        <input type="file" name="images[]" multiple class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
 					<button type="submit" class="btn btn-lg btn-success">Atualizar Produto</button>
 				</div>
 			</form>
 		</div><!-- Fechamento da row dos inputs -->
-
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Imagens do Produto</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <?php foreach($this->product['images'] as $image): ?>
+            <div class="col-md-3">
+                <img src="<?=HOME;?>/uploads/products/<?=$image['image'];?>"
+                     alt="Image do produto <?=$this->product['name'];?>"
+                     class="img-responsive">
+            </div>
+            <?php endforeach; ?>
+        </div>
 	</div>
 <?php require VIEWS_PATH . '/admin/includes/footer.phtml';?>

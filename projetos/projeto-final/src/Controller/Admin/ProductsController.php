@@ -48,6 +48,12 @@ class ProductsController
 			}
 
 			if(isset($images['name']) && $images['name']) {
+
+				if(!Validator::validateImagesFile($images)) {
+					Flash::add('error', 'Imagens enviados não são válidas!');
+					return header('Location: ' . HOME . '/admin/products/new');
+				}
+
 				$upload = new Upload();
 				$upload->setFolder(UPLOAD_PATH . '/products/');
 				$images = $upload->doUpload($images);
@@ -73,6 +79,7 @@ class ProductsController
 	{
 		if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$data = $_POST;
+			$images = $_FILES['images'];
 
 			$data = Sanitizer::sanitizeData($data, Product::$filters);
 
@@ -91,12 +98,32 @@ class ProductsController
 				return header('Location: ' . HOME . '/admin/products/edit/' . $id);
 			}
 
+			if(isset($images['name']) && $images['name']) {
+
+				if(!Validator::validateImagesFile($images)) {
+					Flash::add('error', 'Imagens enviados não são válidas!');
+					return header('Location: ' . HOME . '/admin/products/new');
+				}
+
+				$upload = new Upload();
+				$upload->setFolder(UPLOAD_PATH . '/products/');
+				$images = $upload->doUpload($images);
+
+				foreach ($images as $image) {
+					$imagesData = [];
+					$imagesData['product_id'] = $id;
+					$imagesData['image'] = $image;
+
+					$productImages = new ProductImage(Connection::getInstance());
+					$productImages->insert($imagesData);
+				}
+			}
 			Flash::add('success', 'Produto atualizado com sucesso!');
 			return header('Location: ' . HOME . '/admin/products/edit/' . $id);
 		}
 
 		$view = (new View('admin/products/edit.phtml'));
-		$view->product = (new Product(Connection::getInstance()))->find($id);
+		$view->product = (new Product(Connection::getInstance()))->getProductWithImagesById($id);
 
 		return $view->render();
 	}

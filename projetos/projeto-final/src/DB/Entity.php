@@ -8,7 +8,7 @@ abstract class Entity
 	/**
 	 * @var PDO
 	 */
-	private $conn;
+	protected $conn;
 
 	protected $table;
 
