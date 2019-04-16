@@ -12,6 +12,8 @@ abstract class Entity
 
 	protected $table;
 
+	protected $timestamps = true;
+
 	public function __construct(\PDO $conn)
 	{
 		$this->conn = $conn;
@@ -62,9 +64,12 @@ abstract class Entity
 	{
 		$binds = array_keys($data);
 
-		$sql = 'INSERT INTO ' . $this->table . '('. implode(', ', $binds) . ', created_at, updated_at
-				) VALUES(:' . implode(', :', $binds) .', NOW(), NOW())';
+		$timestampFileds = $this->timestamps ? ', created_at, updated_at' : '';
+		$timestampValues = $this->timestamps ? ', NOW(), NOW()' : '';
 
+		$sql = 'INSERT INTO ' . $this->table . '('. implode(', ', $binds) . $timestampFileds . '
+				) VALUES(:' . implode(', :', $binds) . $timestampValues .')';
+print $sql;
 		$insert = $this->bind($sql, $data);
 
 		$insert->execute();

@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="col-md-12">
 		<h1>Categorias - <small>Gerencie suas categorias</small>
-            <a href="<?=HOME . '/categories/new';?>" class="btn btn-success pull-right">Criar Nova Categoria</a>
+            <a href="<?=HOME . '/admin/categories/new';?>" class="btn btn-success pull-right">Criar Nova Categoria</a>
         </h1>
 		<hr>
 	</div>
@@ -28,10 +28,10 @@
 				<td><?=$c['name'];?></td>
 				<td><?=date('d/m/Y H:i:s', strtotime($c['created_at']));?></td>
 				<td>
-					<a href="<?=HOME;?>/categories/edit/<?=$c['id'];?>" class="btn btn-default">
+					<a href="<?=HOME;?>/admin/categories/edit/<?=$c['id'];?>" class="btn btn-default">
 						Editar
 					</a>
-					<a href="<?=HOME;?>/categories/remove/<?=$c['id'];?>" class="btn btn-danger">
+					<a href="<?=HOME;?>/admin/categories/remove/<?=$c['id'];?>" class="btn btn-danger">
 						Excluir
 					</a>
 				</td>

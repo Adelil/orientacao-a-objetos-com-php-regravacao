@@ -63,6 +63,17 @@
                     </div>
                 </div>
 
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Selecione as Categorias para este Produto</label>
+                        <select name="categories[]" class="form-control" multiple>
+                            <?php foreach($this->categories as $c): ?>
+                                <option value="<?=$c['id'];?>"><?=$c['name'];?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                </div>
+
 				<div class="col-md-12">
 					<button type="submit" class="btn btn-lg btn-success">Criar Produto</button>
 				</div>
