@@ -99,6 +99,7 @@ class ProductsController
 		if($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$data = $_POST;
 			$images = $_FILES['images'];
+			$categories = $data['categories'];
 
 			$data = Sanitizer::sanitizeData($data, Product::$filters);
 
@@ -108,7 +109,7 @@ class ProductsController
 			}
 
 			$data['id'] = (int) $id;
-			$data['price'] = number_format($data['price'], 2, '.', '.');
+			$data['price'] = number_format((float) $data['price'], 2, '.', '.');
 
 			$product = new Product(Connection::getInstance());
 
@@ -116,6 +117,9 @@ class ProductsController
 				Flash::add('error', 'Erro ao atualizar produto!');
 				return header('Location: ' . HOME . '/admin/products/edit/' . $id);
 			}
+
+			$productCategory = new ProductCategory(Connection::getInstance());
+			$productCategory->sync($id, $categories);
 
 			if(isset($images['name']) && $images['name']) {
 
@@ -137,12 +141,20 @@ class ProductsController
 					$productImages->insert($imagesData);
 				}
 			}
+
 			Flash::add('success', 'Produto atualizado com sucesso!');
 			return header('Location: ' . HOME . '/admin/products/edit/' . $id);
 		}
 
 		$view = (new View('admin/products/edit.phtml'));
 		$view->product = (new Product(Connection::getInstance()))->getProductWithImagesById($id);
+
+		$view->productCategories = (new ProductCategory(Connection::getInstance()))->where(['product_id' => $id]);
+		$view->productCategories = array_map(function($line){
+			return $line['category_id'];
+		}, $view->productCategories);
+
+		$view->categories = (new Category(Connection::getInstance()))->findAll();
 
 		return $view->render();
 	}
