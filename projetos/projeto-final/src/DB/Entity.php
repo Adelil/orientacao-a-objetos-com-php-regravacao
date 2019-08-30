@@ -30,7 +30,7 @@ abstract class Entity
 
 	public function find(int $id, $fields = '*'): array
 	{
-		return current($this->where(['id' => $id], '', $fields));
+		return $this->where(['id' => $id], '', $fields);
 	}
 
 	public function where(array $conditions, $operator = ' AND ', $fields = '*') : array
@@ -57,10 +57,12 @@ abstract class Entity
 			throw new \Exception("Nada encontrado para esta consulta!");
 		}
 
+		if($get->rowCount() == 1) return $get->fetch(\PDO::FETCH_ASSOC);
+
 		return $get->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
-	public function insert($data): int
+	public function insert($data): array
 	{
 		$binds = array_keys($data);
 
@@ -74,7 +76,7 @@ abstract class Entity
 
 		$insert->execute();
 
-		return $this->conn->lastInsertId();
+		return $this->find($this->conn->lastInsertId());
 	}
 
 	public function update($data): bool

@@ -12,7 +12,6 @@ class AuthController
 	public function login()
 	{
 		if($_SERVER['REQUEST_METHOD'] == 'POST') {
-			var_dump($_POST);
 			$user = new User(Connection::getInstance());
 			$authenticator = new Authenticator($user);
 

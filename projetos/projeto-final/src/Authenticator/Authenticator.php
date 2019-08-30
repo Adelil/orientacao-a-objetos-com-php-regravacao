@@ -19,9 +19,9 @@ class Authenticator
 
 	public function login(array $credentials)
 	{
-		$user = current($this->user->where([
+		$user = $this->user->where([
 			'email' => $credentials['email'],
-		]));
+		]);
 
 		if(!$user){
 			return false;
