@@ -14,3 +14,16 @@ define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 define('DB_CHARSET', 'UTF8');
+
+
+/**
+ * PagSeguro Enviroments
+ */
+putenv('PAGSEGURO_ENV=sandbox');
+putenv('PAGSEGURO_EMAIL=nandokstro@gmail.com');
+putenv('PAGSEGURO_TOKEN_SANDBOX=74AC9F13254844E592C46F81A546A41B');
+putenv('PAGSEGURO_CHARSET=UTF-8');
+
+\PagSeguro\Library::initialize();
+\PagSeguro\Library::cmsVersion()->setName("Nome")->setRelease("1.0.0");
+\PagSeguro\Library::moduleVersion()->setName("Nome")->setRelease("1.0.0");

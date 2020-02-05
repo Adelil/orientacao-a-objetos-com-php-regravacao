@@ -3,5 +3,16 @@
 	<hr>
 	Code Experts Learning Projeto &copy; Todos os Direitos Reservados - <?=date('Y');?>
 </div>
+<?php if(\Code\Session\Session::has('pagseguro_session')):?>
+
+    <script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    <script>
+        const sessionId = '<?=\Code\Session\Session::get('pagseguro_session');?>';
+
+        PagSeguroDirectPayment.setSessionId(sessionId);
+    </script>
+
+<?php endif;?>
+
 </body>
 </html>

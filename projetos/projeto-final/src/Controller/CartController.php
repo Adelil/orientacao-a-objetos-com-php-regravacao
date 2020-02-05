@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: NandoKstroNet
- * Date: 29/08/19
- * Time: 18:07
- */
-
 namespace Code\Controller;
 
 use Code\Session\Flash;
@@ -65,15 +58,5 @@ class CartController
 		Session::add('cart', $cart);
 
 		return header('Location: ' . HOME . '/cart');
-	}
-
-	public function checkout()
-	{
-		if(!Session::has('user')) {
-			return header('Location: ' . HOME . '/store/login');
-		}
-
-		var_dump(Session::get('user'));
-		//Criar o checkout no PagSeguro
 	}
 }
