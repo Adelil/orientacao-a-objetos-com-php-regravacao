@@ -22,7 +22,7 @@ class StoreController
 				return header("Location: " . HOME . '/store/login');
 			}
 
-			return header("Location: " . HOME . '/cart/checkout');
+			return header("Location: " . HOME . '/checkout');
 		}
 
 		$view = new View('site/login.phtml');

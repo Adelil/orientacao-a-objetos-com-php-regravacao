@@ -10,11 +10,12 @@ class CreditCard
 	private $data;
 	private $user;
 
-	public function __construct($reference, $items, $data)
+	public function __construct($reference, $items, $data, $user)
 	{
 		$this->reference = $reference;
 		$this->items     = $items;
 		$this->data      = $data;
+		$this->user      = $user;
 	}
 
 
@@ -34,9 +35,11 @@ class CreditCard
 			);
 		}
 
-		// @sandbox.pagseguro.com.br <- sandbox | production -> @gmail.com, @hotmail.com
-		$creditCard->setSender()->setName('João Comprador');
-		$creditCard->setSender()->setEmail('email@sandbox.pagseguro.com.br');
+		$name = $this->user['first_name'] . ' ' . $this->user['last_name'];
+		$email = getenv('PAGSEGURO_ENV') == 'sandbox' ? 'email@sandbox.pagseguro.com.br' : $this->user['email'];
+
+		$creditCard->setSender()->setName($name);
+		$creditCard->setSender()->setEmail($email);
 
 		$creditCard->setSender()->setPhone()->withParameters(
 			11,

@@ -1,8 +1,10 @@
 <?php require VIEWS_PATH . '/includes/header.phtml';?>
-<div class="row">
+<div class="row mb30">
 	<div class="col-md-12">
 		<h2>Dados do Cartão para Compra</h2>
 	</div>
+
+    <div class="col-md-12 message"></div>
 </div>
 <div class="row">
 	<div class="col-md-6">
@@ -37,7 +39,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4">
+				<div class="form-group col-md-4">
 					<label>Código de Segurança</label>
 					<input type="text" class="form-control" name="card_cvv">
 				</div>
@@ -47,7 +49,7 @@
 			</div>
 
             <div class="row">
-                <div class="form-group">
+                <div class="form-group col-md-12 text-center">
                     <button class="btn btn-lg btn-success sendPayment">Realizar Pagamento</button>
                 </div>
             </div>
@@ -83,8 +85,10 @@
     let btnSendPayment = document.querySelector('button.sendPayment');
 
     btnSendPayment.addEventListener('click', function(e){
-
         e.preventDefault();
+
+        this.disabled = true;
+        this.innerText = 'Carregando...';
 
         PagSeguroDirectPayment.createCardToken({
             cardNumber: document.querySelector('input[name=card_number]').value,
@@ -115,6 +119,8 @@
             data: data,
             dataType: 'json',
             success: function(res) {
+                document.querySelector('div.message').innerHTML = showMessage(res.data.message, 'success');
+
                 window.location.href = `/checkout/thanks?ref=${res.data.ref_order}`;
             }
         });
@@ -154,5 +160,11 @@
 
 		return select;
 	}
+
+	function showMessage(message, messageType) {
+        return `
+            <div class="alert alert-${messageType}">${message}</div>
+        `;
+    }
 </script>
 <?php require VIEWS_PATH . '/includes/footer.phtml';?>

@@ -7,9 +7,6 @@ trait CheckUserLogged
 {
 	public function check()
 	{
-		if(Session::has('user'))
-			return true;
-
-		return false;
+		return Session::has('user');
 	}
 }

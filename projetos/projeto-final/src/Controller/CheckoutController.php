@@ -6,7 +6,8 @@ use Code\Entity\User;
 use Code\Session\Session;
 use Code\Payment\PagSeguro\{
 	Session as PagSeguroSession,
-	CreditCard
+	CreditCard,
+	Notification
 };
 use Code\View\View;
 use Code\Entity\UserOrder;
@@ -15,12 +16,9 @@ class CheckoutController
 {
 	public function index()
 	{
-		/* if(!Session::has('user')) {
+		if(!Session::has('user')) {
 			return header('Location: ' . HOME . '/store/login');
 		}
-
-		var_dump(Session::get('user'));
-        */
 
 		if(!Session::has('cart')) return header('Location: ' . HOME);
 
@@ -30,8 +28,6 @@ class CheckoutController
 		}, $cart);
 		$totalCart = array_sum($cart);
 
-		//Session::remove('pagseguro_session');
-		//Criar o checkout no PagSeguro
 		PagSeguroSession::createSession();
 
 		$view = new View('site/checkout.phtml');
@@ -48,14 +44,15 @@ class CheckoutController
 
 		$items = Session::get('cart');
 		$data = $_POST;
-		$reference = 'XPTO';
+		$user = Session::get('user');
+		$reference = sha1($user['id'] . $user['email']) . uniqid() . '_CODE_LEARN';
 
-		$creditCardPayment = new CreditCard($reference, $items, $data);
+		$creditCardPayment = new CreditCard($reference, $items, $data, $user);
 		$result = $creditCardPayment->doPayment();
 
 		$userOrder = new UserOrder(Connection::getInstance());
 		$userOrder = $userOrder->createOrder([
-			'user_id' => 2,
+			'user_id' => $user['id'],
 			'reference' => $reference,
 			'pagseguro_code' => $result->getCode(),
 			'pagseguro_status' => $result->getStatus(),
@@ -87,6 +84,37 @@ class CheckoutController
 
 		} catch (\Exception $e) {
 			return header('Location: ' .  HOME);
+		}
+	}
+
+	public function notification()
+	{
+		try {
+			$notification = new Notification();
+			$notification = $notification->getTransaction();
+
+			$userOrder = new UserOrder(Connection::getInstance());
+			$orderId   = $userOrder->where(['reference' => $notification->getReference()])['id'];
+
+			$userOrder->update([
+				'pagseguro_status' => $notification->getStatus(),
+				'id' => $orderId
+			]);
+
+			if($notification->getStatus() == 3) {
+				//Nós podemos liberar o pedido do usuário caso seja digital
+				//Ou mudar o status do pedido, no quesito processo, para em separação no estoque
+			}
+
+			http_response_code(204);
+			return json_encode([]);
+
+		} catch (\Exception $e) {
+
+			http_response_code(500);
+			return json_encode(['data' => [
+				'error' => 'Erro ao receber notificação...',
+			]]);
 		}
 	}
 }
